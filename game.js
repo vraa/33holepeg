@@ -96,7 +96,7 @@
 								width: 'toggle'
 							}, 300, renderBoard);
 						}
-					});
+					}).addClass('target');
 				});
 			}
 		});

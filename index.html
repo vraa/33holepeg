@@ -19,27 +19,64 @@
 			.cell{
 				display: table-cell;
 				padding: 20px;
-				border: 1px solid #ccc;
+				border: 1px solid #3498db;
 			}
 			.cell.dead{
 				border:none;
 			}
+			.cell.hole{
+				background: #ffffff; /* Old browsers */
+background: -moz-radial-gradient(center, ellipse cover,  #ffffff 0%, #f6f6f6 47%, #ededed 100%); /* FF3.6+ */
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#ffffff), color-stop(47%,#f6f6f6), color-stop(100%,#ededed)); /* Chrome,Safari4+ */
+background: -webkit-radial-gradient(center, ellipse cover,  #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* Chrome10+,Safari5.1+ */
+background: -o-radial-gradient(center, ellipse cover,  #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* Opera 12+ */
+background: -ms-radial-gradient(center, ellipse cover,  #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* IE10+ */
+background: radial-gradient(ellipse at center,  #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+			}
+			.cell.hole.target{
+				background: #ffff88; /* Old browsers */
+background: -moz-radial-gradient(center, ellipse cover,  #ffff88 0%, #ffff88 100%); /* FF3.6+ */
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#ffff88), color-stop(100%,#ffff88)); /* Chrome,Safari4+ */
+background: -webkit-radial-gradient(center, ellipse cover,  #ffff88 0%,#ffff88 100%); /* Chrome10+,Safari5.1+ */
+background: -o-radial-gradient(center, ellipse cover,  #ffff88 0%,#ffff88 100%); /* Opera 12+ */
+background: -ms-radial-gradient(center, ellipse cover,  #ffff88 0%,#ffff88 100%); /* IE10+ */
+background: radial-gradient(ellipse at center,  #ffff88 0%,#ffff88 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffff88', endColorstr='#ffff88',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+			}
 			.cell.alive{
-				background-color: #fafafa;
+				background: #88bfe8; /* Old browsers */
+background: -moz-radial-gradient(center, ellipse cover,  #88bfe8 0%, #70b0e0 100%); /* FF3.6+ */
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#88bfe8), color-stop(100%,#70b0e0)); /* Chrome,Safari4+ */
+background: -webkit-radial-gradient(center, ellipse cover,  #88bfe8 0%,#70b0e0 100%); /* Chrome10+,Safari5.1+ */
+background: -o-radial-gradient(center, ellipse cover,  #88bfe8 0%,#70b0e0 100%); /* Opera 12+ */
+background: -ms-radial-gradient(center, ellipse cover,  #88bfe8 0%,#70b0e0 100%); /* IE10+ */
+background: radial-gradient(ellipse at center,  #88bfe8 0%,#70b0e0 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#88bfe8', endColorstr='#70b0e0',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
 			}
 			.marble{
-				transition:border .5s;
-				border:2px solid transparent;
-				cursor: move;
+				border:1px solid #aaa;
+				transition:box-shadow .2s;
+				cursor: pointer;
 				display: inline-block;
-				height: 30px;
-				width: 30px;
+				height: 20px;
+				width: 20px;
 				border-radius: 50%;
-				opacity:.5;
-				background: #b7deed; /* Old browsers */
+				background: #fcfff4; /* Old browsers */
+background: -moz-radial-gradient(center, ellipse cover,  #fcfff4 0%, #e9e9ce 100%); /* FF3.6+ */
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#fcfff4), color-stop(100%,#e9e9ce)); /* Chrome,Safari4+ */
+background: -webkit-radial-gradient(center, ellipse cover,  #fcfff4 0%,#e9e9ce 100%); /* Chrome10+,Safari5.1+ */
+background: -o-radial-gradient(center, ellipse cover,  #fcfff4 0%,#e9e9ce 100%); /* Opera 12+ */
+background: -ms-radial-gradient(center, ellipse cover,  #fcfff4 0%,#e9e9ce 100%); /* IE10+ */
+background: radial-gradient(ellipse at center,  #fcfff4 0%,#e9e9ce 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#e9e9ce',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+
 			}
 			.cell.alive .marble:hover{
-				border:2px solid #f00;
+				box-shadow: 0 0 10px #666;
 			}
 			.dead .marble, .hole .marble{
 				visibility: hidden;
