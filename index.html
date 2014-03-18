@@ -20,11 +20,14 @@
 			h1{
 				font-weight: 200;
 				font-size: 2rem;
+				border-bottom:1px dashed #aaa;
+				padding: 0 0 10px 0;
 			}
 
 			.board{
 				display: table;
 				border-collapse: collapse;
+				margin: 0 auto;
 			}
 			.row{
 				display: table-row;
@@ -99,10 +102,22 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', end
 				border: 1px dashed #888;	
 			}
 
+			.stats{
+				margin:10px 0;
+
+			}
+			.stats label{
+				margin:0 10px;
+			}
+
 		</style>
 	</head>
 	<body>
 		<h1>33 Hole Peg Solitaire</h1>
+		<div class='stats'>
+			<label>Moves: <span id="moves">0</span> </label>
+			<button id="restart">Restart</button>
+		</div>
 		<div id="board" class="board">
 			
 		</div>

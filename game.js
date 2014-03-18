@@ -2,10 +2,19 @@
 
 	var BOARD_SIZE = 7;
 	var board;
+	var moves = 0;
 
 	function init(){
 		createBoard();
 		renderBoard();
+		$("#restart").click(restartGame);
+	}
+
+	function restartGame(){
+		if(confirm('Restart game? Current progress will be lost.')){
+			createBoard();
+			renderBoard();
+		}
 	}
 
 	function createBoard(){
@@ -26,6 +35,10 @@
 		}else{
 			console.log('Not over yet');
 		}
+	}
+
+	function updateScore(){
+		$('#moves').html(moves);
 	}
 
 	function isCorner(i,j){
@@ -71,6 +84,7 @@
 			containment: "#board",
 			revert: "invalid",
 			start : function(){
+				$(this).css('z-index', 10);
 				var cellElm = $(this).parent('.cell');
 				var cX = cellElm.data('x');
 				var cY = cellElm.data('y');
@@ -79,27 +93,35 @@
 					var holeId  = 'x' + hole.x + '-' + 'y' + hole.y;
 					$('#' + holeId + '.hole').droppable({
 						drop : function(){
-							var nX = $(this).data('x'), nY = $(this).data('y');
-							board[nX][nY] = 1;
-							board[cX][cY] = 0;
-							var mX, mY;
-							if( cX == nX){
-								mX = cX;
-								mY = Math.min(cY,nY) + 1;
-							}else{
-								mX = Math.min(cX, nX) + 1;
-								mY = cY;
-							}
-							board[mX][mY] = 0;
-							$('#x' + mX + '-y' + mY).find('.marble').animate({
-								height: 'toggle',
-								width: 'toggle'
-							}, 300, renderBoard);
+							moveMarble($(this).data('x'), $(this).data('y'), cX, cY);
 						}
 					}).addClass('target');
 				});
+			},
+			stop : function(){
+				$('.cell.target').removeClass('target');
 			}
 		});
+		updateScore();
+	}
+
+	function moveMarble(nX, nY, cX, cY){
+		board[nX][nY] = 1;
+		board[cX][cY] = 0;
+		moves += 1;
+		var mX, mY;
+		if( cX == nX){
+			mX = cX;
+			mY = Math.min(cY,nY) + 1;
+		}else{
+			mX = Math.min(cX, nX) + 1;
+			mY = cY;
+		}
+		board[mX][mY] = 0;
+		$('#x' + mX + '-y' + mY).find('.marble').animate({
+			height: 'toggle',
+			width: 'toggle'
+		}, 300, renderBoard);
 	}
 
 	function getAvailableHoles(x,y){
