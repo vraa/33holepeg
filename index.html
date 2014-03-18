@@ -11,7 +11,6 @@
 
 			.board{
 				display: table;
-				border: 1px solid #aaa;
 				border-collapse: collapse;
 			}
 			.row{
@@ -36,14 +35,8 @@
 				height: 30px;
 				width: 30px;
 				border-radius: 50%;
+				opacity:.5;
 				background: #b7deed; /* Old browsers */
-background: -moz-linear-gradient(-45deg,  #b7deed 0%, #71ceef 50%, #21b4e2 51%, #b7deed 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#b7deed), color-stop(50%,#71ceef), color-stop(51%,#21b4e2), color-stop(100%,#b7deed)); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(-45deg,  #b7deed 0%,#71ceef 50%,#21b4e2 51%,#b7deed 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(-45deg,  #b7deed 0%,#71ceef 50%,#21b4e2 51%,#b7deed 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(-45deg,  #b7deed 0%,#71ceef 50%,#21b4e2 51%,#b7deed 100%); /* IE10+ */
-background: linear-gradient(135deg,  #b7deed 0%,#71ceef 50%,#21b4e2 51%,#b7deed 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b7deed', endColorstr='#b7deed',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 			}
 			.cell.alive .marble:hover{
 				border:2px solid #f00;
@@ -55,7 +48,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b7deed', end
 		</style>
 	</head>
 	<body>
-		<h1>33 Hole Peg Solitaire Game</h1>
 
 		<div id="board" class="board">
 			

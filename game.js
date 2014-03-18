@@ -20,6 +20,14 @@
 		board[3][3] = 0;
 	}
 
+	function checkGameStatus(){
+		if(isGameOver()){
+			alert('Game Over');
+		}else{
+			console.log('Not over yet');
+		}
+	}
+
 	function isCorner(i,j){
 		var lEdge = 2, rEdge = BOARD_SIZE - 3;
 		return( 
@@ -58,6 +66,7 @@
 			}
 			boardElm.append(rowElm);
 		}
+		checkGameStatus();
 		$('.marble').draggable({
 			containment: "#board",
 			revert: "invalid",
@@ -86,7 +95,6 @@
 								height: 'toggle',
 								width: 'toggle'
 							}, 300, renderBoard);
-							setTimeout(renderBoard, 400);
 						}
 					});
 				});
@@ -96,12 +104,13 @@
 
 	function getAvailableHoles(x,y){
 		var holes = [];
-		isCellExists(x, y-2) && board[x][y - 2] == 0 ? holes.push({x:x, y: y-2}) : null;
-		isCellExists(x, y+2) && board[x][y + 2] == 0 ? holes.push({x:x, y: y+2}) : null;
-		isCellExists(x-2, y) && board[x - 2][y] == 0 ? holes.push({x:x-2, y: y}) : null;
-		isCellExists(x+2, y) && board[x + 2][y] == 0 ? holes.push({x:x+2, y: y}) : null;
+		isCellExists(x, y-2) && board[x][y-2] == 0 && board[x][y-1] == 1 ? holes.push({x:x, y: y-2}) : null;
+		isCellExists(x, y+2) && board[x][y+2] == 0 && board[x][y+1] == 1 ? holes.push({x:x, y: y+2}) : null;
+		isCellExists(x-2, y) && board[x-2][y] == 0 && board[x-1][y] == 1 ? holes.push({x:x-2, y: y}) : null;
+		isCellExists(x+2, y) && board[x+2][y] == 0 && board[x+1][y] == 1 ? holes.push({x:x+2, y: y}) : null;
 		return holes;
 	}
+
 
 	function isCellExists(x,y){
 		var val;
@@ -109,6 +118,18 @@
 			val = board[x][y];
 		}catch(e){
 			return false;
+		}
+		return true;
+	}
+
+	function isGameOver(){
+		var i,j;
+		for(i=0; i < BOARD_SIZE; i++){
+			for(j=0; j < BOARD_SIZE; j++){
+				if(board[i][j] == 1 && getAvailableHoles(i,j).length > 0){
+					return false;
+				}
+			}
 		}
 		return true;
 	}
