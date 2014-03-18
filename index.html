@@ -2,207 +2,52 @@
 <html>
 	<head>
 		<meta charset="utf-8">
+
 		<meta name="description" content="33 Hole Peg Solitaire Online Game with JavaScript / HTML5">
 		<meta name="keywords" content="33, hole, peg, solitaire, javascript, online, game, board, puzzle">
 
 		<title>33 Hole Peg Solitaire Online Game</title>
 		<link href='http://fonts.googleapis.com/css?family=Exo' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" href="game.css">
 
-		<style type="text/css">
-
-			body{
-				background:#fff url(bg-noise.png);
-				font:1em Exo, Arial, Sans;
-				color: #fff;
-				text-align: center;
-			}
-
-			h1{
-				font-weight: 200;
-				font-size: 2rem;
-				border-bottom:1px dashed #aaa;
-				padding: 0 0 10px 0;
-			}
-
-			.board{
-				display: table;
-				border-collapse: collapse;
-				margin: 0 auto;
-			}
-			.row{
-				display: table-row;
-			}
-			.cell{
-				display: table-cell;
-				padding: 20px;
-				border: 1px solid #3498db;
-			}
-			.cell.dead{
-				border:none;
-				box-shadow: none;
-			}
-			.cell.hole{
-				background: #ffffff; /* Old browsers */
-				background: -moz-radial-gradient(center, ellipse cover,  #ffffff 0%, #f6f6f6 47%, #ededed 100%); /* FF3.6+ */
-				background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#ffffff), color-stop(47%,#f6f6f6), color-stop(100%,#ededed)); /* Chrome,Safari4+ */
-				background: -webkit-radial-gradient(center, ellipse cover,  #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* Chrome10+,Safari5.1+ */
-				background: -o-radial-gradient(center, ellipse cover,  #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* Opera 12+ */
-				background: -ms-radial-gradient(center, ellipse cover,  #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* IE10+ */
-				background: radial-gradient(ellipse at center,  #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* W3C */
-				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-			}
-			.cell.hole.target{
-				background: #ffff88; /* Old browsers */
-				background: -moz-radial-gradient(center, ellipse cover,  #ffff88 0%, #ffff88 100%); /* FF3.6+ */
-				background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#ffff88), color-stop(100%,#ffff88)); /* Chrome,Safari4+ */
-				background: -webkit-radial-gradient(center, ellipse cover,  #ffff88 0%,#ffff88 100%); /* Chrome10+,Safari5.1+ */
-				background: -o-radial-gradient(center, ellipse cover,  #ffff88 0%,#ffff88 100%); /* Opera 12+ */
-				background: -ms-radial-gradient(center, ellipse cover,  #ffff88 0%,#ffff88 100%); /* IE10+ */
-				background: radial-gradient(ellipse at center,  #ffff88 0%,#ffff88 100%); /* W3C */
-				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffff88', endColorstr='#ffff88',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-			}
-
-			.cell.alive{
-				background: #88bfe8; /* Old browsers */
-				background: -moz-radial-gradient(center, ellipse cover,  #88bfe8 0%, #70b0e0 100%); /* FF3.6+ */
-				background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#88bfe8), color-stop(100%,#70b0e0)); /* Chrome,Safari4+ */
-				background: -webkit-radial-gradient(center, ellipse cover,  #88bfe8 0%,#70b0e0 100%); /* Chrome10+,Safari5.1+ */
-				background: -o-radial-gradient(center, ellipse cover,  #88bfe8 0%,#70b0e0 100%); /* Opera 12+ */
-				background: -ms-radial-gradient(center, ellipse cover,  #88bfe8 0%,#70b0e0 100%); /* IE10+ */
-				background: radial-gradient(ellipse at center,  #88bfe8 0%,#70b0e0 100%); /* W3C */
-				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#88bfe8', endColorstr='#70b0e0',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-			}
-			.marble{
-				border:1px solid #aaa;
-				transition:box-shadow .2s;
-				cursor: pointer;
-				display: inline-block;
-				height: 20px;
-				width: 20px;
-				border-radius: 50%;
-				background: #fcfff4; /* Old browsers */
-				background: -moz-radial-gradient(center, ellipse cover,  #fcfff4 0%, #e9e9ce 100%); /* FF3.6+ */
-				background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#fcfff4), color-stop(100%,#e9e9ce)); /* Chrome,Safari4+ */
-				background: -webkit-radial-gradient(center, ellipse cover,  #fcfff4 0%,#e9e9ce 100%); /* Chrome10+,Safari5.1+ */
-				background: -o-radial-gradient(center, ellipse cover,  #fcfff4 0%,#e9e9ce 100%); /* Opera 12+ */
-				background: -ms-radial-gradient(center, ellipse cover,  #fcfff4 0%,#e9e9ce 100%); /* IE10+ */
-				background: radial-gradient(ellipse at center,  #fcfff4 0%,#e9e9ce 100%); /* W3C */
-				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#e9e9ce',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-			}
-			.cell.alive .marble:hover{
-				box-shadow: 0 0 10px #666;
-			}
-			.dead .marble, .hole .marble{
-				visibility: hidden;
-			}
-			.hole.target .marble{
-				visibility: visible;
-				border: 1px dashed #888;	
-			}
-
-			.stats{
-				margin:10px 0;
-
-			}
-			.stats label, .stats #moves, .stats button{
-				margin:0 10px;
-			}
-			.scoreboard #moves{
-				color: yellow;
-				font-size: 2rem;
-			}
-
-			/* thanks to http://daneden.github.io/animate.css/ */
-
-			.animated {
-			  -webkit-animation-duration: 1s;
-			  animation-duration: 1s;
-			  -webkit-animation-fill-mode: both;
-			  animation-fill-mode: both;
-			}
-
-			@-webkit-keyframes swing {
-			  20% {
-			    -webkit-transform: rotate(15deg);
-			    transform: rotate(15deg);
-			  }
-
-			  40% {
-			    -webkit-transform: rotate(-10deg);
-			    transform: rotate(-10deg);
-			  }
-
-			  60% {
-			    -webkit-transform: rotate(5deg);
-			    transform: rotate(5deg);
-			  }
-
-			  80% {
-			    -webkit-transform: rotate(-5deg);
-			    transform: rotate(-5deg);
-			  }
-
-			  100% {
-			    -webkit-transform: rotate(0deg);
-			    transform: rotate(0deg);
-			  }
-			}
-
-			@keyframes swing {
-			  20% {
-			    -webkit-transform: rotate(15deg);
-			    -ms-transform: rotate(15deg);
-			    transform: rotate(15deg);
-			  }
-
-			  40% {
-			    -webkit-transform: rotate(-10deg);
-			    -ms-transform: rotate(-10deg);
-			    transform: rotate(-10deg);
-			  }
-
-			  60% {
-			    -webkit-transform: rotate(5deg);
-			    -ms-transform: rotate(5deg);
-			    transform: rotate(5deg);
-			  }
-
-			  80% {
-			    -webkit-transform: rotate(-5deg);
-			    -ms-transform: rotate(-5deg);
-			    transform: rotate(-5deg);
-			  }
-
-			  100% {
-			    -webkit-transform: rotate(0deg);
-			    -ms-transform: rotate(0deg);
-			    transform: rotate(0deg);
-			  }
-			}
-
-			.swing {
-			  -webkit-transform-origin: top center;
-			  -ms-transform-origin: top center;
-			  transform-origin: top center;
-			  -webkit-animation-name: swing;
-			  animation-name: swing;
-			}
-
-
-		</style>
 	</head>
 	<body>
-		<h1>33 Hole Peg Solitaire</h1>
+		<div class='gameover hidden'>
+			<div class="actions">
+				<h2>Game Over!</h2>
+				<p><button id="newGame">New Game</button></p>
+				<p><a href="https://twitter.com/share" class="twitter-share-button" data-via="vraa" data-size="large" data-hashtags="33holepegsolitaire">Tweet</a></p>
+			</div>
+		</div>
+		<h1>33 Hole Peg Solitaire Game</h1>
 		<div class='scoreboard'>	
-			
 		</div>
 		<div id="board" class="board">
-			
 		</div>
-		
+		<button id="restart">Restart</button>
+		<div class="about">
+			<h2>How to play?</h2>
+			<p>Click and drag a marble <span class='marble'></span>, jumping over another single marble <span class='marble'></span> to a empty hole (white box). You can move the marbles in either horizontal or vertical direction. The jumped over marble will be removed from the board, thus making a new hole.</p>
+
+			<div class="author">
+				<p>Made by <a href="http://veerasundar.com/blog">Veera</a> | <a href="https://github.com/vraa/33holepeg">Source</a>
+			</div>
+		</div>
 
 		<script src="jquery-1.11.0.min.js"></script>
 		<script src="jquery-ui-1.10.4.custom.min.js"></script>
 		<script src="game.js"></script>
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-2028306-39', 'veerasundar.com');
+		  ga('send', 'pageview');
+
+		</script>
+		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
 	</body>
 </html>
