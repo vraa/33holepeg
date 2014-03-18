@@ -12,6 +12,7 @@
 
 	function restartGame(){
 		if(confirm('Restart game? Current progress will be lost.')){
+			moves = 0;
 			createBoard();
 			renderBoard();
 		}
@@ -38,7 +39,7 @@
 	}
 
 	function updateScore(){
-		$('#moves').html(moves);
+		$('.scoreboard').empty().append($('<div>').attr('id', 'moves').addClass('swing animated').html(moves));
 	}
 
 	function isCorner(i,j){
