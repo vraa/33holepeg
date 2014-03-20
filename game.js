@@ -124,10 +124,17 @@
 		function renderCell(i, j){
 			var id = 'x'+ i + '-' + 'y' + j;
 			var cellElm = $('<div>').addClass('cell').attr('id', id);
+
 			cellElm.data('x', i).data('y', j);
-			cellElm.empty().append($('<span>').addClass('marble'));
+			var marble = $('<span>').addClass('marble');
+			isEligibleCell(i,j) ? marble.addClass('eligible') : null;
+			cellElm.empty().append(marble);
 			cellElm.addClass(getCellClass(board[i][j]));
 			return cellElm;
+		}
+
+		function isEligibleCell(i,j){
+			return getAvailableHoles(i,j).length > 0;
 		}
 
 		function onDraggibgMarble(){
