@@ -16,6 +16,7 @@
 		function restartGame(){
 			if(confirm('Restart game?')){
 				moves = 0;
+				deleteSavedGame();
 				createBoard();
 				renderBoard();
 				$('.gameover').addClass('hidden');
@@ -25,6 +26,20 @@
 		function createBoard(){
 			var i,j;
 			board = new Array(BOARD_SIZE);
+			var savedGame = fetchSavedGame();
+			if(savedGame == undefined || savedGame == null){
+				loadDefaultGame();
+			}else{
+				if(confirm('Continue from the last played game?')){
+					loadSavedGame(savedGame);
+				}else{
+					deleteSavedGame();
+					loadDefaultGame();
+				}	
+			}
+		}
+
+		function loadDefaultGame(){
 			for(i=0; i<BOARD_SIZE; i++){
 				board[i] = new Array(BOARD_SIZE);
 				for(j=0; j<BOARD_SIZE; j++){
@@ -34,6 +49,19 @@
 			board[3][3] = 0;
 		}
 
+		function loadSavedGame(savedGame){
+			moves = savedGame.moves;
+			board  = savedGame.board;
+		}
+
+		function deleteSavedGame(){
+			window.localStorage.removeItem('brainvita');
+		}
+
+		function fetchSavedGame(){
+			return JSON.parse(window.localStorage.getItem('brainvita'));
+		}
+
 		function checkGameStatus(){
 			if(isGameOver()){
 				setTimeout(function(){
@@ -41,6 +69,14 @@
 				}, 500);
 				
 			}
+		}
+
+		function saveGame(){
+			var brainvita = {
+				moves : moves,
+				board : board
+			};
+			window.localStorage.setItem('brainvita', JSON.stringify(brainvita));
 		}
 
 		function updateScore(){
@@ -128,6 +164,7 @@
 				height: 'toggle',
 				width: 'toggle'
 			}, 300, renderBoard);
+			saveGame();
 		}
 
 		function getAvailableHoles(x,y){
