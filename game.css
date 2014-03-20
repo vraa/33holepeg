@@ -251,7 +251,20 @@ button{
 	color: yellow;
 }
 
-
+.more-help{
+	font-size: .9rem;
+	line-height: 1.9rem;
+}
+.more-help ul{
+	list-style: none;
+	text-align: center;
+}
+.more-help li{
+	margin: 10px 0;
+}
+.more-help a{
+	color: #fff;
+}
 @media (max-width: 480px){ 
 	.cell{
 		padding: 9px;
