@@ -11,12 +11,14 @@ h1{
 	font-size: 2rem;
 	border-bottom:1px dashed #aaa;
 	padding: 0 0 10px 0;
+
 }
 
 .board{
 	display: table;
 	border-collapse: collapse;
 	margin: 20px auto;
+
 }
 .row{
 	display: table-row;
@@ -225,4 +227,14 @@ button{
 }
 .author a:link, .author a:visited, .author a:hover, .author a:active{
 	color: yellow;
+}
+
+
+@media (max-width: 480px){ 
+	.cell{
+		padding: 9px;
+	}
+	.about{
+		width: 90%;
+	}
 }
