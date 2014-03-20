@@ -33,7 +33,7 @@
 				if(confirm('Continue from the last played game?')){
 					loadSavedGame(savedGame);
 				}else{
-					deleteSavedGame();
+					deleteSavedGame();	
 					loadDefaultGame();
 				}	
 			}
@@ -93,6 +93,10 @@
 			);
 		}
 
+		function getCellClass(val){
+			return {'-1' : 'dead', '0' : 'hole', '1' : 'alive'}[val];
+		}
+
 
 		function renderBoard(){
 			var boardElm = $('#board');
@@ -101,23 +105,7 @@
 			for(i=0; i<BOARD_SIZE; i++){
 				var rowElm = $('<div>').addClass('row');
 				for(j=0; j<BOARD_SIZE; j++){
-					var id = 'x'+ i + '-' + 'y' + j;
-					var cellElm = $('<div>').addClass('cell').attr('id', id);
-					cellElm.data('x', i).data('y', j);
-					cellElm.empty().append($('<span>').addClass('marble'));
-					switch(board[i][j]){
-						case -1:
-							cellClass = 'dead';
-							break;
-						case 0:
-							cellClass = 'hole';
-							break;
-						case 1:
-							cellClass = "alive";
-							break;
-					}
-					cellElm.addClass(cellClass);
-					rowElm.append(cellElm);
+					rowElm.append(renderCell(i,j));
 				}
 				boardElm.append(rowElm);
 			}
@@ -125,26 +113,37 @@
 			$('.cell .marble').draggable({
 				containment: "#board",
 				revert: "invalid",
-				start : function(){
-					$(this).css('z-index', 10);
-					var cellElm = $(this).parent('.cell');
-					var cX = cellElm.data('x');
-					var cY = cellElm.data('y');
-					var holes = getAvailableHoles(cX, cY);
-					$.each(holes, function(i,hole){
-						var holeId  = 'x' + hole.x + '-' + 'y' + hole.y;
-						$('#' + holeId + '.hole').droppable({
-							drop : function(){
-								moveMarble($(this).data('x'), $(this).data('y'), cX, cY);
-							}
-						}).addClass('target');
-					});
-				},
+				start : onDraggibgMarble,
 				stop : function(){
 					$('.cell.target').removeClass('target');
 				}
 			});
 			updateScore();
+		}
+
+		function renderCell(i, j){
+			var id = 'x'+ i + '-' + 'y' + j;
+			var cellElm = $('<div>').addClass('cell').attr('id', id);
+			cellElm.data('x', i).data('y', j);
+			cellElm.empty().append($('<span>').addClass('marble'));
+			cellElm.addClass(getCellClass(board[i][j]));
+			return cellElm;
+		}
+
+		function onDraggibgMarble(){
+			$(this).css('z-index', 10);
+			var cellElm = $(this).parent('.cell');
+			var cX = cellElm.data('x');
+			var cY = cellElm.data('y');
+			var holes = getAvailableHoles(cX, cY);
+			$.each(holes, function(i,hole){
+				var holeId  = 'x' + hole.x + '-' + 'y' + hole.y;
+				$('#' + holeId + '.hole').droppable({
+					drop : function(){
+						moveMarble($(this).data('x'), $(this).data('y'), cX, cY);
+					}
+				}).addClass('target');
+			});
 		}
 
 		function moveMarble(nX, nY, cX, cY){
