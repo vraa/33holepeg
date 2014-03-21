@@ -11,6 +11,9 @@
 			createBoard();
 			renderBoard();
 			$("#restart, #newGame").click(restartGame);
+			$('#hintCheck').click(function(){
+				$('body').toggleClass('hintOn');
+			});
 		}
 
 		function restartGame(){
