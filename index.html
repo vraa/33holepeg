@@ -21,34 +21,40 @@
 			</div>
 		</div>
 		<h1>33 Hole Peg Solitaire / Brainvita Game</h1>
-		<div class='scoreboard'>	
-		</div>
-		<div id="board" class="board">
-		</div>
-		<div class="controls">
-			<ul>
-				<li><label for="hintCheck"><input type="checkbox" id="hintCheck" name="hintCheck"> Show Hint</label></li>
-				<li><button id="restart">Restart</button></li>
-			</ul>
-		</div>
-		<div class="about">
-			<h2>How to play?</h2>
-			<p>Click and drag a marble <span class='marble'></span>, jumping over another single marble <span class='marble'></span> to a empty hole (white box). You can move the marbles in either horizontal or vertical direction. The jumped over marble will be removed from the board, thus making a new hole. Remove as many marbles as possible.</p>
-
-			<div class="author">
-				<p>Made by <a href="http://veerasundar.com/blog">Veera</a> | <a href="https://github.com/vraa/33holepeg">Source</a>
+		<div class="main">
+			<div class="gamepad">
+				<div class='scoreboard'>	
+				</div>
+				<div id="board" class="board">
+				</div>
+				<div class="controls">
+					<ul>
+						<li><label for="hintCheck"><input type="checkbox" id="hintCheck" name="hintCheck"> Show Hint</label></li>
+						<li><button id="restart">Restart</button></li>
+					</ul>
+				</div>
 			</div>
+			<div class="about">
+				<h2>How to play?</h2>
+				<p>Click and drag a marble <span class='marble eligible'></span>, jumping over another single marble <span class='marble eligible'></span> / <span class='marble'></span>  to a empty hole (white box). You can move the marbles in either horizontal or vertical direction. The jumped over marble will be removed from the board, thus making a new hole. Remove as many marbles as possible.</p>
 
-			<div class="more-help">
-				<ul>
-					<li><a href="http://www.durangobill.com/Peg33.html" title="How many ways (number of solutions) are there to win the
-33 hole (32 pegs) version of Peg Solitaire?">Math behind Brainvita</a></li>
-					<li>
-						<a href="http://www.wikihow.com/Win-the-Peg-Solitaire-Game-(English-Board)" title="How to Win the Peg Solitaire Game (English Board)">How to Win the Peg Solitaire Game (English Board)</a>
-					</li>
-				</ul>
+				<div class="author">
+					<p>Made by <a href="http://veerasundar.com/blog">Veera</a> | <a href="https://github.com/vraa/33holepeg">Source</a></p>
+				</div>
+
+				<div class="more-help">
+					<ul>
+						<li><a href="http://www.durangobill.com/Peg33.html" title="How many ways (number of solutions) are there to win the
+	33 hole (32 pegs) version of Peg Solitaire?">Math behind Brainvita</a></li>
+						<li>
+							<a href="http://www.wikihow.com/Win-the-Peg-Solitaire-Game-(English-Board)" title="How to Win the Peg Solitaire Game (English Board)">How to Win the Peg Solitaire Game (English Board)</a>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
+		
+		
 
 		<script src="jquery-1.11.0.min.js"></script>
 		<script src="jquery-ui-1.10.4.custom.min.js"></script>

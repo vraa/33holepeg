@@ -225,8 +225,9 @@ button{
 }
 
 .about{
-	width:50%;
+	width:90%;
 	margin: 0 auto;
+	text-align: center;
 }
 .about p{
 	font-size: 1.2rem;
@@ -267,11 +268,19 @@ button{
 		.controls label{
 			cursor: pointer;
 		}
-@media (max-width: 480px){ 
-	.cell{
-		padding: 9px;
+
+@media (min-width: 1024px){
+	.main{
+		width: 100%;
+	}
+	.main .gamepad, .main .about{
+		float: left;
+		width: 50%;
 	}
 	.about{
-		width: 90%;
+		text-align: left;
+	}
+	.more-help ul{
+		text-align: left;
 	}
 }
