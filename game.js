@@ -20,9 +20,7 @@
 			if(confirm('Restart game?')){
 				moves = 0;
 				deleteSavedGame();
-				createBoard();
-				renderBoard();
-				$('.gameover').addClass('hidden');
+				window.location.reload();
 			}
 		}
 
