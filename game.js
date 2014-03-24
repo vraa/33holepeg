@@ -121,7 +121,16 @@
 					$('.cell.target').removeClass('target');
 				}
 			});
+			animateEligibleMarbles();
 			updateScore();
+		}
+
+		function animateEligibleMarbles(){
+			$('.marble.eligible').on('mouseenter', function(){
+				$(this).addClass('swing animated');
+			}).on('mouseleave', function(){
+				$(this).removeClass('swing animated');
+			});
 		}
 
 		function renderCell(i, j){
