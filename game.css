@@ -207,9 +207,9 @@ h1{
 .gameover .actions{
 	position: relative;
 	top:30%;
+	text-align: center;
 }
 .gameover .actions p{
-	text-align: center;
 	padding: 10px;
 }
 
@@ -294,5 +294,11 @@ button{
 	}
 	.more-help ul{
 		text-align: left;
+	}
+	.gameover .actions{
+		position: relative;
+		top:30%;
+		text-align: left;
+		padding-left: 20%;
 	}
 }
