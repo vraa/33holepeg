@@ -8,7 +8,7 @@ body{
 
 h1{
 	font-weight: 200;
-	font-size: 2rem;
+	font-size: 1rem;
 	border-bottom:1px dashed #aaa;
 	padding: 0 0 10px 0;
 
@@ -25,7 +25,7 @@ h1{
 }
 .cell{
 	display: table-cell;
-	padding: 15px;
+	padding: 10px;
 	border: 1px solid #6d0019;
 }
 
@@ -269,7 +269,19 @@ button{
 			cursor: pointer;
 		}
 
+@media (min-width: 768px){
+	h1{
+		font-size: 1.5rem;
+	}
+	.cell{
+		padding: 15px;
+	}
+}
+
 @media (min-width: 1024px){
+	h1{
+		font-size: 2rem;
+	}
 	.main{
 		width: 100%;
 	}
